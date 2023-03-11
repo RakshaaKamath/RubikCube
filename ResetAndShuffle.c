@@ -22,9 +22,6 @@ void output(int x, int y, char *string)
 
 static float speed=0.0;
 
-
-
-
 static int top[3][3]= {{0,0,0},{0,0,0},{0,0,0}},
 right[3][3]={{1,1,1},{1,1,1},{1,1,1}},
 front[3][3]={{2,2,2},{2,2,2},{2,2,2}},
