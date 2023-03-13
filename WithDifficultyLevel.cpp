@@ -1378,7 +1378,7 @@ void shuffle_cube()
      srand(time(NULL));
 
     int i;
-    for (i = 0; i < difficulty_level*2; i++) {
+    for (i = 0; i < difficulty_level*3; i++) {
         int choice = rand() % 5;
         switch (choice) {
             case 0:
@@ -1837,16 +1837,16 @@ void mymenu(int id)
 				glutIdleFunc(spincube);
 				break;
 
-      case 13 :
-           shuffle_cube();
-           timerValue = 0;
-           glutIdleFunc(spincube);
-           break;
-      case 14 :
-          reset_cube();
-          timerValue = 0; // should stop the count value when its called
-          glutIdleFunc(spincube);
-          break;
+            case 13 :
+                shuffle_cube();
+                timerValue = 0;
+                glutIdleFunc(spincube);
+                break;
+            case 14 :
+                reset_cube();
+                timerValue = 0; // should stop the count value when its called
+                glutIdleFunc(spincube);
+                break;
 			case 15:
 					exit(0);
 					break;
@@ -1863,8 +1863,13 @@ void timer(int value)
 
 int main(int argc, char** argv)
 {
-   std::cout << "Enter the difficulty level to solve the Rubik's Cube (1-10): ";
-   std::cin >> difficulty_level;
+    std::cout << "Enter the difficulty level to solve the Rubik's Cube (1-10): ";
+    std::cin >> difficulty_level;
+    while(difficulty_level>10)
+    {
+        std::cout << "Are you dumb? :)\nKindly enter the difficulty level again: ";
+        std::cin >> difficulty_level;
+    }
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -1873,13 +1878,13 @@ int main(int argc, char** argv)
 	glutReshapeFunc(myreshape);
 	glutIdleFunc(spincube);
 
-  glutDisplayFunc(display);
-  glutTimerFunc(1000, timer, 0);
+    glutDisplayFunc(display);
+    glutTimerFunc(1000, timer, 0);
 
 	glutMouseFunc(mouse);
 	glutMotionFunc(motion);
 	glutCreateMenu(mymenu);
-  shuffle_cube();
+    shuffle_cube();
 	glutAddMenuEntry("INSTRUCTIONS",0);
 	glutAddMenuEntry("------------",0);
 	glutAddMenuEntry("a: Top",1);
